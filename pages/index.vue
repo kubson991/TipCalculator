@@ -5,7 +5,7 @@
       <div class="appContainer__BillContainer">
         <h2>Bill</h2>
         <div class="xd">
-          <span></span><input type="number" v-model="inputBill" />
+          <span></span><input type="number" placeholder="0.00" v-model="inputBill" />
         </div>
       </div>
       <div class="appContainer__percentajeContainer">
@@ -26,8 +26,8 @@
       </div>
       <div class="appContainer__peopleNumber">
         <section><h2>Number of People</h2><pre v-show="danger">Cant't be zero</pre></section>
-        <div class="xd" :class="{ danger: danger }">
-          <span></span><input type="number" v-model="inputPeople" />
+        <div class="xd" :class="{ danger: danger }" >
+          <span></span><input type="number" placeholder="0" @keyup="peopleformatter($event)" v-model="inputPeople"  />
         </div>
       </div>
       <div class="appContainer__results">
@@ -97,13 +97,17 @@ export default {
     inputPeople(value){
       if (parseInt(value)===0) {
         this.danger=true
-        console.log('wtf')
       }else{
         this.danger=false
       }
     }
   },
   methods: {
+    peopleformatter(event){
+      const input=event.target
+      input.value=input.value.replace('.','')
+
+    },
     reset(){
       this.percentaje = ""
       this.inputBill = ""
@@ -125,7 +129,6 @@ export default {
       button.classList.add("papa");
     },
     customPercentaje(event) {
-      console.log(event.target.valueAsNumber);
       const value = event.target.valueAsNumber;
       if (event.target.value != "") {
         if (!value) {
