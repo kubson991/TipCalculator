@@ -25,7 +25,7 @@
         </div>
       </div>
       <div class="appContainer__peopleNumber">
-        <h2>Number of People</h2>
+        <section><h2>Number of People</h2><pre v-show="danger">Cant't be zero</pre></section>
         <div class="xd" :class="{ danger: danger }">
           <span></span><input type="number" v-model="inputPeople" />
         </div>
@@ -179,11 +179,14 @@ main {
 .main__appContainer {
   background-color: white;
 }
-h2 {
+h2 , pre {
   color: var(--Darkgrayishcyan1);
   font-weight: 700;
   font-size: 1.5rem;
   margin-bottom: 0.8rem;
+}
+pre{
+  color: orange;
 }
 .main__titleContainer {
   display: flex;
@@ -300,6 +303,10 @@ input:not(.custom) {
   background-color: var(--Lightgrayishcyan2);
   display: flex;
   align-items: center;
+}
+.appContainer__peopleNumber section {
+  display: flex;
+  justify-content: space-between;
 }
 .appContainer__peopleNumber span {
   display: inline-block;
